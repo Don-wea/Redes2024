@@ -1,0 +1,53 @@
+# ignore ALL .pdf files
+*.pdf
+*.pyc
+*.zip
+*.rar
+*.7z
+*.class
+*.exe
+*.ini
+*.o
+*icon.png
+*.pdn
+*.dll
+*.mk
+*.cdr
+*.svg
+*.pyxel
+*.so
+*.vscode
+*.wip
+
+
+
+#ignore all generated artifacts
+*/target/
+*/build/
+*/bin/
+*__pycache__/
+__pycache__/
+build/
+target/
+CMakeFiles/
+bin/
+out/
+Wip/
+wip/
+Legacy/
+
+/Java projects/MyProjectu/build/
+
+/build*
+/.vscode
+/cpm_modules
+.DS_Store
+
+
+# Ignore CMake cache file
+CMakeCache.txt
+cmake_install.cmake
+
+# Ignore CMake-generated Makefile
+Makefile
+/Java projects/mi_Interface/nbproject/private/

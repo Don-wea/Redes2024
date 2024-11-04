@@ -1,0 +1,8 @@
+version: '3'
+services:
+  wifi_server:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - FILTER_LEVEL=medium  # Example of a configurable environment variable
