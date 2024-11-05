@@ -1,8 +1,16 @@
-version: '3'
+version: '3.8'
+
 services:
-  wifi_server:
-    build: .
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server  # Adjust as necessary
     ports:
       - "5000:5000"
-    environment:
-      - FILTER_LEVEL=medium  # Example of a configurable environment variable
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client  # Adjust as necessary
+    depends_on:
+      - server

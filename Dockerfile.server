@@ -4,17 +4,17 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy all neccesary files to the working directory
 COPY requirements.txt /app/requirements.txt
+COPY utilities /app/utilities
+COPY assets /app/assets
+COPY src /app/src
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code
-COPY src /app
 
 # Expose the port the server will run on
 EXPOSE 5000
 
 # Run the application
-CMD ["python", "server.py"]
+CMD ["python", "src/server/server.py"]

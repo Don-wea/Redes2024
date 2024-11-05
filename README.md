@@ -27,4 +27,18 @@ chmod +x utilities/buildImage.sh
 
 ### Windows
 
-use vscode
+nose
+
+## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Execution
+
+### Unix
+
+- Crear Docker Image
+```bash
+chmod +x utilities/runImage.sh
+./utilities/runImage.sh
+```
+
+### Windows
+
+nose

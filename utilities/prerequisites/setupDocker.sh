@@ -18,3 +18,6 @@ sudo apt-get update
 
 # Install last Docker version
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Install Docker Compose
+sudo apt-get install docker-compose-plugin

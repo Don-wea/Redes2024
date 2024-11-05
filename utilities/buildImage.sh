@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker build -t wifi_message_filter .
+# nombre: wifi_message_filter
+# version: latest
+docker build -t raspy-wifi-server:latest .
