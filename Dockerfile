@@ -1,17 +1,20 @@
-# Base image for Raspberry Pi (use the correct version for your device)
+# Use the official Python image as a base
 FROM python:3.9-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy files
-COPY src /app
+# Copy the requirements file into the container
+COPY requirements.txt /app/requirements.txt
 
-# Install required Python libraries
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port for the server
+# Copy the rest of the application code
+COPY src /app
+
+# Expose the port the server will run on
 EXPOSE 5000
 
-# Run the server
+# Run the application
 CMD ["python", "server.py"]

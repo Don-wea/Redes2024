@@ -1,13 +1,30 @@
 # <img src="assets/img/logo.png" alt="raspe logo" width="64"/> REDES 2024 <img src="assets/img/logo.png" alt="raspe logo" width="64"/>
-    Emitidor de se;al wifi y filtrador de mensajes.
+    Emitidor de senial wifi y filtrador de mensajes.
 
 ## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Requirements
 
-1. Docker
+### Windows
+- Python 3.8 o superior
+- Docker
+
+### Unix
+- Install Docker
+```bash
+chmod +x utilities/prerequisites/setup.sh
+./utilities/prerequisites/setup.sh
+```
+
 
 ## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Installation
 
 ### Unix
 
+- Crear Docker Image
+```bash
+chmod +x utilities/buildImage.sh
+./utilities/buildImage.sh
+```
 
 ### Windows
+
+use vscode

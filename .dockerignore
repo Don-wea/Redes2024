@@ -1,0 +1,29 @@
+# Ignore Python cache and virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Ignore Git files and directories
+.git
+.gitignore
+
+# Ignore Docker files you don’t want in the image
+.dockerignore
+Dockerfile
+
+# Ignore IDE and editor settings
+.vscode/
+.idea/
+*.swp
+
+# Ignore build artifacts and logs
+*.log
+*.tmp
+build/
+dist/
+
+# Exclude any sensitive configuration files
+.env
