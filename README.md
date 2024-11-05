@@ -1,5 +1,5 @@
 # <img src="assets/img/logo.png" alt="raspe logo" width="64"/> REDES 2024 <img src="assets/img/logo.png" alt="raspe logo" width="64"/>
-    Emitidor de senial wifi y filtrador de mensajes.
+Emitidor de senial wifi y filtrador de mensajes.
 
 ## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Requirements
 
