@@ -1,42 +1,61 @@
 # <img src="assets/img/logo.png" alt="raspe logo" width="64"/> REDES 2024 <img src="assets/img/logo.png" alt="raspe logo" width="64"/>
 Emitidor de senial wifi y filtrador de mensajes.
 
-## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Requirements
+## <img src="assets/img/logo.png" alt="raspe logo" width="64"/> Requirements
 
 ### Windows
-- Python 3.8 o superior
 - Docker
 
 ### Unix
 - Install Docker
 ```bash
-chmod +x utilities/prerequisites/setup.sh
-./utilities/prerequisites/setup.sh
+chmod +x docker/prerequisites/setupDocker.sh
+./docker/prerequisites/setupDocker.sh
 ```
 
 
-## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Installation
+## <img src="assets/img/logo.png" alt="raspe logo" width="64"/> Installation
 
 ### Unix
 
-- Crear Docker Image
+#### Crear Docker Images del servidor
+
+- Configuracion
 ```bash
-chmod +x utilities/buildImage.sh
-./utilities/buildImage.sh
+chmod +x docker/*.sh
+sudo ./docker/setup.sh
+```
+- efectuar cambios en el code
+```bash
+sudo ./docker/build.sh
+```
+
+#### Crear Docker Images del cliente de prueba
+- Configuracion
+```bash
+chmod +x client/docker/*.sh
+sudo ./client/docker/setup.sh
+```
+- efectuar cambios en el code
+```bash
+sudo ./client/docker/build.sh
 ```
 
 ### Windows
 
 nose
 
-## <img src="assets/img/logo.png" alt="raspe logo" width="64"/>Execution
+## <img src="assets/img/logo.png" alt="raspe logo" width="64"/> Execution
 
 ### Unix
 
-- Crear Docker Image
+- Arrancar el servidor
 ```bash
-chmod +x utilities/runImage.sh
-./utilities/runImage.sh
+sudo ./docker/run.sh
+```
+- Arrancar el cliente de prueba
+```bash
+sudo ./client/docker/run.sh
 ```
 
 ### Windows

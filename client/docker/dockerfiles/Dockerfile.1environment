@@ -1,0 +1,7 @@
+FROM ubuntu:20.04 AS environment
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y python3.10 python3-pip --no-install-recommends
+
+#postgresql

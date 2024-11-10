@@ -1,0 +1,4 @@
+# Use the dependencies image as the base
+FROM my-wifi-server:dependencies-latest AS code
+COPY src /app/src
+COPY assets /app/assets

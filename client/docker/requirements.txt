@@ -1,0 +1,6 @@
+# requirements.txt
+
+# pandas==2.2.3
+# matplotlib==3.9.2
+# numpy==1.21.4
+# Any other dependencies with fixed versions

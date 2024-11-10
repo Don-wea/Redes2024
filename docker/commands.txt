@@ -1,0 +1,31 @@
+# always use 'sudo'
+
+
+# --- IMAGES ---
+# check all images
+docker images
+
+# # remove an image
+docker rmi <image_id_or_name:tag>
+
+# # remove all images
+docker rmi -f $(docker images -q)
+
+# # prune unused images
+docker system prune -af
+
+# # clean up everything unused
+docker system prune -a --volumes
+
+
+
+# --- SERVICE ---
+
+# Disable docker service
+sudo systemctl disable docker
+
+# Start docker service
+sudo systemctl start docker
+
+# Stop docker service
+sudo systemctl stop docker

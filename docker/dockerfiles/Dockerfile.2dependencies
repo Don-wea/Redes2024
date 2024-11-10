@@ -1,0 +1,7 @@
+# Use the environment image as the base
+FROM my-wifi-server:environment-latest AS dependencies
+WORKDIR /app
+
+COPY /docker/requirements.txt /app/docker/requirements.txt
+
+RUN pip install -r docker/requirements.txt

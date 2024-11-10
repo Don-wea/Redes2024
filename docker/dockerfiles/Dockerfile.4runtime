@@ -1,0 +1,4 @@
+# Use the code image as the base
+FROM my-wifi-server:code-latest AS runtime
+WORKDIR /app
+CMD ["python3", "src/server.py"]

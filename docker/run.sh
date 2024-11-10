@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run raspy-wifi-server:latest
+docker run my-wifi-server:runtime-latest
 
 # run server only
 # docker-compose up raspy-wifi-server
