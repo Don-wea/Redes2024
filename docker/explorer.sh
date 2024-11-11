@@ -17,20 +17,19 @@ echo "Creating network: $NETWORK_NAME"
 docker network create "$NETWORK_NAME"
 
 
-# Step 2: Run the container on the created network and expose the port
+# Step 2: Run the container on the created network and execute main.py
 if docker ps -a --filter name=^/${CONTAINER_NAME}$ --format "{{.Names}}" | grep -w "$CONTAINER_NAME" > /dev/null; then
     echo "Container $CONTAINER_NAME already exists. Removing it..."
     docker rm -f "$CONTAINER_NAME"
 fi
-
-echo "Starting container: $CONTAINER_NAME"
-docker run --rm \
+echo "Starting container: $CONTAINER_NAME in interactive mode"
+docker run --rm -it \
     --network "$NETWORK_NAME" \
     --name "$CONTAINER_NAME" \
     -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
-    -p "$PORT:$PORT" \ 
+    -p "$PORT:$PORT" \
     "$IMAGE_NAME" \
-    python3 src/server.py
+    /bin/bash
 
 
 # --- Clean up ---

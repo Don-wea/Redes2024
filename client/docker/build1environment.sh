@@ -16,13 +16,23 @@ TAG4="runtime-latest"
 # List of tags in reverse order (from most recent to earliest)
 TAGS=("$TAG4" "$TAG3" "$TAG2" "$TAG1")
 
-# Loop through each tag, check if it exists and remove the image if it does
+# Loop through each tag, check if it exists, and remove the image if it does
 for TAG in "${TAGS[@]}"; do
     if sudo docker images -q "$IMAGE_NAME:$TAG"; then
         echo "Removing old image: $IMAGE_NAME:$TAG"
+
+        # Stop and remove all containers using the image
+        containers=$(docker ps -a -q --filter ancestor="$IMAGE_NAME:$TAG")
+        if [ -n "$containers" ]; then
+            echo "Stopping and removing containers using $IMAGE_NAME:$TAG"
+            docker rm -f $containers
+        fi
+
+        # Remove the image
         sudo docker rmi "$IMAGE_NAME:$TAG" -f
     fi
 done
+
 
 # Build the new image
 echo "Building new image: $IMAGE_NAME:$TAG1"

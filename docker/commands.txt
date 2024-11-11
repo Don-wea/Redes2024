@@ -1,31 +1,124 @@
 # always use 'sudo'
 
-
 # --- IMAGES ---
 # check all images
 docker images
 
-# # remove an image
+# remove an image
 docker rmi <image_id_or_name:tag>
 
-# # remove all images
+# remove all images
 docker rmi -f $(docker images -q)
 
-# # prune unused images
-docker system prune -af
+# prune unused images
+docker image prune -a -f
 
-# # clean up everything unused
-docker system prune -a --volumes
+# clean up everything unused
+docker system prune -a --volumes -f
 
 
 
-# --- SERVICE ---
+# --- CONTAINERS ---
 
-# Disable docker service
+# check running containers
+docker container ls
+
+# check all containers (including stopped ones)
+docker container ls -a
+
+# delete a single container by name or ID
+docker rm <container_name_or_id>
+
+# delete all stopped containers
+docker container prune -f
+
+# delete all containers (running and stopped)
+docker rm -f $(docker ps -aq)
+
+# delete containers by image
+docker ps -a --filter "ancestor=<image_name>" -q | xargs docker rm -f
+
+# delete specific containers by ID or name
+docker rm -f <container_name_or_id1> <container_name_or_id2>
+
+
+
+# --- SERVICES ---
+
+# Disable Docker service
 sudo systemctl disable docker
 
-# Start docker service
+# Enable Docker service on startup
+sudo systemctl enable docker
+
+# Start Docker service
 sudo systemctl start docker
 
-# Stop docker service
+# Stop Docker service
 sudo systemctl stop docker
+
+# Restart Docker service
+sudo systemctl restart docker
+
+# Check Docker service status
+sudo systemctl status docker
+
+
+
+# --- NETWORKS ---
+
+# check all networks
+docker network ls
+
+# create a new network
+docker network create <network_name>
+
+# delete a network by name or ID
+docker network rm <network_name_or_id>
+
+# prune unused networks
+docker network prune -f
+
+# inspect a network (view details)
+docker network inspect <network_name_or_id>
+
+# connect a container to a network
+docker network connect <network_name> <container_name_or_id>
+
+# disconnect a container from a network
+docker network disconnect <network_name> <container_name_or_id>
+
+# --- system ---
+
+# prune unused containers, images, volumes, and networks
+docker system prune -a --volumes -f
+
+# prune unused containers
+docker container prune -f
+
+# prune unused images
+docker image prune -f
+
+# prune unused volumes
+docker volume prune -f
+
+# prune unused networks
+docker network prune -f
+
+# prune build cache
+docker builder prune -f
+
+# list all unused volumes
+docker volume ls -f dangling=true
+
+# list all unused images
+docker images -f dangling=true
+
+# check Docker system status
+docker info
+
+# check disk usage of Docker
+docker system df
+
+# check all stopped containers
+docker ps -a -f status=exited
