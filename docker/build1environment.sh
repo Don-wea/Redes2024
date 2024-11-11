@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Pull image only if it doesn't exist
-if ! sudo docker images -q "ubuntu/postgres:latest"; then
+if ! docker images -q "ubuntu/postgres:latest"; then
     echo "Image not found, pulling: ubuntu/postgres:latest"
-    sudo docker pull ubuntu/postgres:latest
+    docker pull ubuntu/postgres:latest
 else 
     echo "Image already exists: ubuntu/postgres:latest"
 fi
@@ -27,7 +27,7 @@ TAGS=("$TAG4" "$TAG3" "$TAG2" "$TAG1")
 
 # Loop through each tag, check if it exists, and remove the image if it does
 for TAG in "${TAGS[@]}"; do
-    if sudo docker images -q "$IMAGE_NAME:$TAG"; then
+    if docker images -q "$IMAGE_NAME:$TAG"; then
         echo "Removing old image: $IMAGE_NAME:$TAG"
 
         # Stop and remove all containers using the image
@@ -38,7 +38,7 @@ for TAG in "${TAGS[@]}"; do
         fi
 
         # Remove the image
-        sudo docker rmi "$IMAGE_NAME:$TAG" -f
+        docker rmi "$IMAGE_NAME:$TAG" -f
     fi
 done
 

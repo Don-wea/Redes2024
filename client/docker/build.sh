@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo ./client/docker/build3code.sh
-sudo ./client/docker/build4runtime.sh
+./client/docker/build3code.sh
+./client/docker/build4runtime.sh

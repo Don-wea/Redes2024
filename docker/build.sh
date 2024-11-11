@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo ./docker/build3code.sh
-sudo ./docker/build4runtime.sh
+./docker/build3code.sh
+./docker/build4runtime.sh
