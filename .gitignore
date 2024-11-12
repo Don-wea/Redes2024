@@ -19,8 +19,6 @@
 *.vscode
 *.wip
 
-
-
 #ignore all generated artifacts
 */target/
 */build/
@@ -42,6 +40,12 @@ Legacy/
 /.vscode
 /cpm_modules
 .DS_Store
+
+# Ignore all .json files
+*.json
+
+# Unignore .json files with a specific extension
+!*.b.json
 
 
 # Ignore CMake cache file

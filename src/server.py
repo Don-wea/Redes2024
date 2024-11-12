@@ -1,5 +1,3 @@
-print("esta funcionando el servidor con exito")
-
 import socket
 #import time
 from core import serverLogic as sl
@@ -53,4 +51,4 @@ def start_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
 
 if __name__ == "__main__":
     print("programa comenzado...")
-    start_server('redes2024_container_server',44555)
+    start_server()

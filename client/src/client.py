@@ -10,11 +10,6 @@ DEFAULT_HOST = 'localhost'        # Symbolic name meaning all available interfac
 DEFAULT_PORT = 44555              # Arbitrary non-privileged port\
 
 
-
-
-
-
-
 def start_client(host=DEFAULT_HOST, port=DEFAULT_PORT):
     # - --- ~ event Creation ~ ---
     cl.eventCreation()
@@ -70,4 +65,4 @@ def start_client(host=DEFAULT_HOST, port=DEFAULT_PORT):
 
 
 if __name__ == "__main__":
-    start_client('redes2024_container_server',44555)
+    start_client()
