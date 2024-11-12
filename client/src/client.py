@@ -2,7 +2,7 @@ print("esta funcionando el cliente con exito")
 
 
 import socket
-import time
+import argparse
 from core  import clientLogic as cl
 
 
@@ -65,4 +65,9 @@ def start_client(host=DEFAULT_HOST, port=DEFAULT_PORT):
 
 
 if __name__ == "__main__":
-    start_client()
+    parser = argparse.ArgumentParser(description="Start a server with a specified host and port.")
+    parser.add_argument("--host", default=DEFAULT_HOST, help="Host to bind the server to")
+    parser.add_argument("--port", type=int, default=DEFAULT_PORT, help="Port to bind the server to")
+
+    args = parser.parse_args()
+    start_client(host=args.host, port=args.port)
