@@ -1,20 +1,24 @@
 -- Crear la base de datos
+CREATE DATABASE proyecto_raspberry;  
 
 -- Conectarse a la nueva base de datos
 \c proyecto_raspberry;
 
 -- Crear tabla de usuarios
+CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nom_usuario VARCHAR(50) UNIQUE NOT NULL,
     contrasena VARCHAR(50) NOT NULL
 );
 
 -- Crear tabla de lista negra
+CREATE TABLE blacklist (
     id SERIAL PRIMARY KEY,
     nom_usuario VARCHAR(50) UNIQUE NOT NULL
 );
 
 -- Crear tabla de logs para registrar todos los intentos de acceso
+CREATE TABLE logs_acceso (
     id SERIAL PRIMARY KEY,
     nom_usuario VARCHAR(50),
     acceso_permitido BOOLEAN,
@@ -23,6 +27,7 @@
 );
 
 -- Función para pedir usuario y contraseña, validar acceso, y guardar todo en logs
+CREATE FUNCTION validar_acceso(nom_usuario VARCHAR, contrasena VARCHAR) RETURNS VOID AS $$
 DECLARE
     usuario_encontrado BOOLEAN;
     en_lista_negra BOOLEAN;
