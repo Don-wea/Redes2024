@@ -32,31 +32,3 @@ def validar_acceso(nom_usuario, contrasena):
         if conexion:
             cursor.close()
             conexion.close()
-            
-def mostrar_logs():
-    try:
-        # Conexión a la base de datos
-        conexion = psycopg2.connect(
-            host="localhost",
-            database="proyecto_raspberry",
-            user="tu_usuario",
-            password="tu_password"
-        )
-        cursor = conexion.cursor()
-
-        # Consultar los registros de logs_acceso
-        cursor.execute("SELECT * FROM logs_acceso;")
-        registros = cursor.fetchall()
-
-        print("\n--- LOGS DE ACCESO ---")
-        for registro in registros:
-            print(registro)
-
-    except psycopg2.Error as e:
-        print(f"Error al consultar los logs: {e}")
-
-    finally:
-        # Cerrar conexión
-        if conexion:
-            cursor.close()
-            conexion.close()
