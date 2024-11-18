@@ -29,6 +29,7 @@ def validar_acceso(nom_usuario, contrasena):
         print(f"Error al ejecutar la función en la base de datos: {e}")
 
     finally:
+        # Cerrar la conexión
         if conexion:
             cursor.close()
             conexion.close()
