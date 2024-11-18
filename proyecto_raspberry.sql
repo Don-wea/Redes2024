@@ -9,9 +9,6 @@ BEGIN
 END
 $$;
 
--- Seleccionar la base de datos
-\c proyecto_raspberry;
-
 -- Crear tabla de usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
     id SERIAL PRIMARY KEY,
