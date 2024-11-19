@@ -1,0 +1,23 @@
+sudo apt install hostapd
+
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+
+hostapd -v # Verifica la version
+
+#Solucionar problemas de interfaz
+
+sudo iw dev ap0 del
+
+sudo ip link set wlan0 down
+sudo ip link set wlan0 up
+
+#Crea la interfaz y asigna IP
+
+sudo iw dev wlan0 interface add ap0 type __ap
+sudo ip addr add 192.168.4.1/24 dev ap0
+sudo ip link set ap0 up
+
+
+#Inicializa el AP
+sudo nano /etc/hostapd/hostapd.conf
