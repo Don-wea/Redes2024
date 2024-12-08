@@ -1,6 +1,4 @@
 print("esta funcionando el cliente con exito")
-
-
 import socket
 import argparse
 from core  import clientLogic as cl
