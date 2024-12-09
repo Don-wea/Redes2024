@@ -3,7 +3,7 @@
 # Variables
 NETWORK_NAME="redes2024_network"
 CONTAINER_NAME="redes2024_container_server"
-IMAGE_NAME="my-wifi-server:runtime-latest"  
+IMAGE_NAME="my-wifi-server:latest"  
 POSTGRES_PASSWORD="Redes2024"
 PORT="5432"
 
@@ -22,6 +22,7 @@ if docker ps -a --filter name=^/${CONTAINER_NAME}$ --format "{{.Names}}" | grep 
     echo "Container $CONTAINER_NAME already exists. Removing it..."
     docker rm -f "$CONTAINER_NAME"
 fi
+
 echo "Starting container: $CONTAINER_NAME in interactive mode"
 docker run --rm -it \
     --network "$NETWORK_NAME" \

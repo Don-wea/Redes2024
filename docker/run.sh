@@ -3,9 +3,10 @@
 # Variables
 NETWORK_NAME="redes2024_network"
 CONTAINER_NAME="redes2024_container_server"
-IMAGE_NAME="my-wifi-server:runtime-latest"  
+IMAGE_NAME="my-wifi-server:latest"  
 POSTGRES_PASSWORD="Redes2024"
 PORT="5432"
+SOCKETPORT="44555"
 
 # Step 1: Create a Docker network
 if docker network ls --filter name=^${NETWORK_NAME}$ --format "{{.Name}}" | grep -w "$NETWORK_NAME" > /dev/null; then
@@ -28,10 +29,9 @@ docker run --rm \
     --network "$NETWORK_NAME" \
     --name "$CONTAINER_NAME" \
     -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
-    -p "$PORT:$PORT" \ 
+    -p "$PORT:$PORT" \
     "$IMAGE_NAME" \
-    python3 src/server.py
-
+    python3 src/server.py --host "$CONTAINER_NAME" --port "$SOCKETPORT"
 
 # --- Clean up ---
 echo "Cleaning up network: $NETWORK_NAME"

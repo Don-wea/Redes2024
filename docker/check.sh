@@ -12,9 +12,10 @@ echo
 # docker ps 
 # echo
 
+echo --- volumes ---
+docker volume ls
+
 echo --- networks ---
 docker network ls
 echo
 
-echo --- volumes ---
-docker volume ls

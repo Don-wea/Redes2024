@@ -1,4 +1,0 @@
-# Use the code image as the base
-FROM my-wifi-client:code-latest AS runtime
-WORKDIR /app
-CMD ["python3", "client/src/client.py"]

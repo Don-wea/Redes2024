@@ -1,0 +1,27 @@
+FROM ubuntu:20.04 AS environment
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y python3.10 python3-pip --no-install-recommends
+
+#postgresql
+
+# Use the environment image as the base
+FROM environment AS dependencies
+WORKDIR /app
+
+COPY /client/docker/requirements.txt /app/docker/requirements.txt
+
+RUN pip install -r docker/requirements.txt
+
+# Use the dependencies image as the base
+FROM dependencies AS code
+COPY client/src /app/src
+# COPY client/assets /app/assets
+
+# Use the code image as the base
+FROM code AS runtime
+WORKDIR /app
+CMD ["python3", "client/src/client.py"]
+
+

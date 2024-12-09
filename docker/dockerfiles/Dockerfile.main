@@ -1,0 +1,32 @@
+# Use the official ubuntu/postgres image as the base image
+FROM ubuntu/postgres:latest AS environment
+
+# Update package list and install Python, pip, and other tools you need
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    curl \
+    git \
+    vim \
+    net-tools
+
+# Use the environment image as the base
+FROM environment AS dependencies
+WORKDIR /app
+
+COPY /docker/requirements.txt /app/docker/requirements.txt
+
+RUN pip install -r docker/requirements.txt
+
+# Use the dependencies image as the base
+FROM dependencies AS code
+COPY container /app/
+
+# Use the code image as the base
+FROM code AS runtime
+WORKDIR /app
+CMD ["python3", "src/server.py"]
+# CMD ["docker/explorer.sh"]
+

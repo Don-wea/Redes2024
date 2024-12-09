@@ -2,8 +2,8 @@ import socket
 import argparse
 from core import serverLogic as sl
 
-DEFAULT_HOST = 'localhost'         # Symbolic name meaning all available interfaces
-DEFAULT_PORT = 44555               # Arbitrary non-privileged port
+DEFAULT_HOST = 'redes2024_container_server'         # Symbolic name meaning all available interfaces
+DEFAULT_PORT = 44555                                # Arbitrary non-privileged port
 
 def start_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
     # - --- ~ event Creation ~ ---
