@@ -72,7 +72,7 @@ nose
 sudo ./docker/check.sh
 ```
 
-- Para ver todas las instancias de docker
+- Para eliminar toda instancia de docker que no este siendo utilizada
 ```bash
 sudo ./docker/prune.sh
 ```

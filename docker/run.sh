@@ -40,8 +40,7 @@ docker run --rm \
     -p "${PORT}:${PORT}" \
     -v "${VOLUME_NAME}:/var/lib/postgresql/data" \
     "${IMAGE_NAME}" \
-    # python3 src/server.py --host "$CONTAINER_NAME" --port "$SOCKETPORT"
-    /bin/bash
+    __innit__/innitRun.sh --host "$CONTAINER_NAME" --port "$SOCKETPORT"
 
 # # --- Clean up ---
 # echo "Cleaning up network: $NETWORK_NAME"
