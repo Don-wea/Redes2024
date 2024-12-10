@@ -7,18 +7,32 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-dev \
     build-essential \
+    nano \
     curl \
     git \
     vim \
-    net-tools
+    net-tools \
+    postgresql \
+    postgresql-contrib
+
+# Switch to 'postgres' user for subsequent commands
+USER postgres
+
+# Create and initialize the PostgreSQL cluster
+RUN pg_createcluster 14 main
+
+# Switch back to root for service management and additional tasks
+USER root
+
+# Run necessary service commands or other tasks
+RUN service postgresql start
 
 # Use the environment image as the base
 FROM environment AS dependencies
+COPY container/__dependencies__ /app/__dependencies__
 WORKDIR /app
 
-COPY /docker/requirements.txt /app/docker/requirements.txt
-
-RUN pip install -r docker/requirements.txt
+RUN pip install -r __dependencies__/requirements.txt
 
 # Use the dependencies image as the base
 FROM dependencies AS code
@@ -27,6 +41,5 @@ COPY container /app/
 # Use the code image as the base
 FROM code AS runtime
 WORKDIR /app
-CMD ["python3", "src/server.py"]
-# CMD ["docker/explorer.sh"]
 
+CMD ["./__innit__/start.sh"]
