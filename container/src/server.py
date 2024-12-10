@@ -1,51 +1,44 @@
 import socket
+import threading
 import argparse
-from core import serverLogic as sl
+from queue import Queue
+
+from servidor import serverLogic as sl
+from cliente import clientHandler as ch
+
+#import time
+
 
 DEFAULT_HOST = 'redes2024_container_server'         # Symbolic name meaning all available interfaces
 DEFAULT_PORT = 44555                                # Arbitrary non-privileged port
 
+
+# Inicia el servidor
 def start_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
-    # - --- ~ event Creation ~ ---
-    sl.eventCreation()
-
-    # ! Create Socket
-    mySocket = (socket.socket(socket.AF_INET, socket.SOCK_STREAM))
+    mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     mySocket.bind((host, port))
-    mySocket.listen()
-    
-    try:
-        # ! Connect with the client.
-        connection, client_address = mySocket.accept()
-        print(f'Connection established with {client_address}')
+    mySocket.listen(5)
+    print(f"Servidor iniciado en {host}:{port}")
 
-        # <--
-        message = connection.recv(1024).decode()
-        # - --- ~ event Connection Open ~ ---
-        response = sl.eventConnectionOpen(message)
-        # -->
-        connection.sendall(response.encode())
-        
+    # Crear una cola para transmitir información
+    serverClient_queue = Queue()
+
+    # --  ~ ~ SERVER LOGIC THREAD ~ ~  -- 
+    serverLogic_thread = threading.Thread(target=sl.mainLogic, args=(host, port,serverClient_queue))
+    serverLogic_thread.start()
+    
+
+    try:
         while True:
-            # <--
-            message = connection.recv(20240).decode()
-            # - --- ~ event Step ~ ---
-            response = sl.eventStep(message)
-            # -->
-            if isinstance(response, str) and response.endswith('.json'):  # Send JSON if it is a JSON file.
-                with open(response, 'rb') as f:  # Open the file in binary mode
-                    connection.sendfile(f)  # Use sendfile to send the file over the socket
-                    print("JSON file sent to client")
-            elif response == "100":
-                break  # Process of information exchange has ended.
-            else:
-                connection.sendall(response.encode())
+            connection, address = mySocket.accept()
+            # --  ~ ~ CLIENT THREAD ~ ~  -- 
+            client_thread = threading.Thread(target=ch.clientHandler, args=(connection, address,serverClient_queue))
+            client_thread.start()
+
 
     finally:
-        # ! End connection with the client.
-        connection.close()
-        # - --- ~ event Connection Close ~ ---
-        sl.eventConnectionClose()
+        mySocket.close()
+        print("Servidor cerrado.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Start a server with a specified host and port.")
@@ -56,3 +49,4 @@ if __name__ == "__main__":
 
     print("Program started...")
     start_server(host=args.host, port=args.port)
+
