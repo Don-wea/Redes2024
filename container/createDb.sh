@@ -7,7 +7,7 @@ DB_PASSWORD="Redes2024"                    # PostgreSQL password for the user
 DB_NAME="mainDB"                           # Database name
 
 # Create system user for PostgreSQL
-useradd -m $DB_USER
+# useradd -m $DB_USER
 
 
 # Set the PostgreSQL password for authentication

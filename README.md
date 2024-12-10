@@ -43,11 +43,22 @@ nose
 
 - Arrancar el servidor
 ```bash
+# Dejar corriendo el container en 2do plano
+sudo ./docker/start.sh
+
+# Crear la base de datos
+sudo ./docker/startDB.sh
+
+# Ejecutar el servidor
 sudo ./docker/run.sh
 ```
 - Arrancar el servidor en mode explorer
 ```bash
-sudo ./docker/explorer.sh
+# Permisos 'postgres'
+sudo ./docker/explore.sh
+
+# Permisos 'root'
+sudo ./docker/exploreRoot.sh
 ```
 
 - Arrancar el cliente de prueba
@@ -72,9 +83,13 @@ nose
 sudo ./docker/check.sh
 ```
 
-- Para eliminar toda instancia de docker que no este siendo utilizada
+- Para eliminar instancias de docker
 ```bash
+# Elimina toda instancia de docker que no este siendo utilizada
 sudo ./docker/prune.sh
+
+# Elimina el contenedor principal y el volumen de la base de datos para reiniciar ABSOLUTAMENTE todo.
+sudo ./docker/deleteData.sh
 ```
 
 - Para revisar la lista de comandos de docker revisar archivo "docker/commands.txt"
