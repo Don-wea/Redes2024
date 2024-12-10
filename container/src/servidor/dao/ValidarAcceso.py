@@ -14,9 +14,9 @@ def conectar_postgres():
     try:
         conexion = psycopg2.connect(
             host="localhost",
-            database="Proyecto_Raspberry",
-            user="1234",
-            password="1234"
+            database="mainDB",
+            user="postgres",
+            password="Redes2024"
         )
         conexion.autocommit = True
         return conexion

@@ -43,16 +43,16 @@ nose
 
 - Arrancar el servidor
 ```bash
-# Dejar corriendo el container en 2do plano
+# Dejar el container en ejecucion, 2do plano
 sudo ./docker/start.sh
 
-# Crear la base de datos
+# Crear la base de datos en el container en ejecucion
 sudo ./docker/startDB.sh
 
-# Ejecutar el servidor
+# Ejecutar el servidor dentro del container en ejecucion
 sudo ./docker/run.sh
 ```
-- Arrancar el servidor en mode explorer
+- Arrancar el container en mode explorador
 ```bash
 # Permisos 'postgres'
 sudo ./docker/explore.sh
