@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# muestra por consola todas las imagenes, contenedores, volumenes y networks existentes.
+
 echo - --- Images --- -
 docker images
 echo
@@ -7,10 +9,6 @@ echo
 echo - --- Containers --- -
 docker container ls
 echo
-
-# echo - --- running containers --- -
-# docker ps 
-# echo
 
 echo - --- Volumes --- -
 docker volume ls

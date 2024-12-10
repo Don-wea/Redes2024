@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# elimina todos los datos no utilizados de docker 
+# peligro: podria pasar a eliminar la imagen base del proyecto, si no tienes buena conexion a internet, ten cuidado de borrar la imagen principal.
+
 # delete all stopped containers
 docker container prune -f
 

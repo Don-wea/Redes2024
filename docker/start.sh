@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# este archivo inicializa el container en segundo plano. despues del 'setup.sh' se ejecuta este archivo para crear que el container este en funcionamiento.
+
+# setup.sh -> start.sh -> startDB.sh -> run.sh
+
+
 # Variables
 NETWORK_NAME="redes2024_network"
 CONTAINER_NAME="redes2024_container_server"

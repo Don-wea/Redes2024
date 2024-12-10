@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# este archivo crea la base principal del sistema.
+
+# setup.sh -> start.sh -> startDB.sh -> run.sh
+
+
+
 # Variables
 CONTAINER_NAME="redes2024_container_server"
 SQL_SCRIPT_PATH="./database/mainDB.sql" # Adjust to the path of your .sql file in the container

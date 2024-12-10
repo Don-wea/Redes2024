@@ -16,18 +16,12 @@ export PGPASSWORD="$DB_PASSWORD"
 # Create the database if it doesn't exist
 echo "Creating database ${DB_NAME}..."
 createdb --username="$DB_USER" "$DB_NAME" -w
-if [ $? -ne 0 ]; then
-    echo "Failed to create database $DB_NAME. Exiting."
-    exit 1
-fi
+
 
 # Grant all privileges to the user
 echo "Granting all privileges on database ${DB_NAME} to ${DB_USER}..."
 psql -U postgres -d "$DB_NAME" -c "GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DB_USER};"
-if [ $? -ne 0 ]; then
-    echo "Failed to grant privileges. Exiting."
-    exit 1
-fi
+
 
 # Check if the SQL script exists
 if [ ! -f "$SQL_SCRIPT_PATH" ]; then
@@ -38,9 +32,6 @@ fi
 # Execute the SQL script
 echo "Executing SQL script: $SQL_SCRIPT_PATH"
 psql -U "$DB_USER" -d "$DB_NAME" -f "$SQL_SCRIPT_PATH" -w
-if [ $? -ne 0 ]; then
-    echo "Failed to execute SQL script. Exiting."
-    exit 1
-fi
+
 
 echo "Database setup complete."

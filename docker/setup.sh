@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Este archivo crea la imagen principal del programa, es el primer archivo que se ejecuta para construir el programa.
+# Este archivo se debe ejecutar cada vez que se realizen cambios tanto en el 'dockerfile' como en la carpeta "container", ya que eso significa un cambio de imagen.
+
 # Pull image only if it doesn't exist
 if ! docker images -q "ubuntu/postgres:latest"; then
     echo "Image not found, pulling: ubuntu/postgres:latest"
