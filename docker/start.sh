@@ -4,7 +4,7 @@
 NETWORK_NAME="redes2024_network"
 CONTAINER_NAME="redes2024_container_server"
 IMAGE_NAME="my-wifi-server:latest"
-PS_USER="admin"
+#PS_USER="postgres"
 PS_PASSWORD="Redes2024"
 DATABASE="mainDB"
 LOCALHOST="30432"
@@ -35,17 +35,15 @@ fi
 
 # Run the container
 echo "Starting container: ${CONTAINER_NAME}"
-docker run -it \
+docker run -d\
     --network "${NETWORK_NAME}" \
     --name "${CONTAINER_NAME}" \
     -e TZ=UTC \
-    -e POSTGRES_USER="${PS_USER}" \
     -e POSTGRES_PASSWORD="${PS_PASSWORD}" \
     -e POSTGRES_DB="${DATABASE}" \
-    -p "${PORT}:${PORT}" \
+    -p "${LOCALHOST}:${PORT}" \
     -v "${VOLUME_NAME}:/var/lib/postgresql/data" \
-    "${IMAGE_NAME}" \
-    /bin/bash
+    "${IMAGE_NAME}"
 
     # docker run -it \
     # --name postgres-container \

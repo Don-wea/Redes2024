@@ -1,11 +1,13 @@
 #!/bin/bash
 
-
-# prune unused images
-docker image prune -a -f
+# delete all stopped containers
+docker container prune -f
 
 # clean up everything unused
 docker system prune -a --volumes -f
 
-# delete all stopped containers
-docker container prune -f
+# prune unused images
+docker image prune -a -f
+
+
+

@@ -2,9 +2,32 @@
 
 # Variables
 SQL_SCRIPT_PATH="./database/mainDB.sql"     # Path to your .sql script inside the container
-DB_USER="root"                          # PostgreSQL user
-DB_NAME="mainDB"                            # Initial database (can change if needed)
-DB_PASSWORD="Redes2024"                     # PostgreSQL password for the user
+DB_USER="postgres"                         # PostgreSQL user
+DB_PASSWORD="Redes2024"                    # PostgreSQL password for the user
+DB_NAME="mainDB"                           # Database name
+
+# Create system user for PostgreSQL
+useradd -m $DB_USER
+
+
+# Set the PostgreSQL password for authentication
+export PGPASSWORD="$DB_PASSWORD"
+
+# Create the database if it doesn't exist
+echo "Creating database ${DB_NAME}..."
+createdb --username="$DB_USER" "$DB_NAME" -w
+if [ $? -ne 0 ]; then
+    echo "Failed to create database $DB_NAME. Exiting."
+    exit 1
+fi
+
+# Grant all privileges to the user
+echo "Granting all privileges on database ${DB_NAME} to ${DB_USER}..."
+psql -U postgres -d "$DB_NAME" -c "GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DB_USER};"
+if [ $? -ne 0 ]; then
+    echo "Failed to grant privileges. Exiting."
+    exit 1
+fi
 
 # Check if the SQL script exists
 if [ ! -f "$SQL_SCRIPT_PATH" ]; then
@@ -12,11 +35,12 @@ if [ ! -f "$SQL_SCRIPT_PATH" ]; then
     exit 1
 fi
 
-# Set PGPASSWORD environment variable
-export PGPASSWORD="$DB_PASSWORD"
-
 # Execute the SQL script
 echo "Executing SQL script: $SQL_SCRIPT_PATH"
 psql -U "$DB_USER" -d "$DB_NAME" -f "$SQL_SCRIPT_PATH" -w
+if [ $? -ne 0 ]; then
+    echo "Failed to execute SQL script. Exiting."
+    exit 1
+fi
 
 echo "Database setup complete."

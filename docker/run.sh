@@ -4,6 +4,7 @@
 NETWORK_NAME="redes2024_network"
 CONTAINER_NAME="redes2024_container_server"
 IMAGE_NAME="my-wifi-server:latest"  
+POSTGRES_USER="admin"
 POSTGRES_PASSWORD="Redes2024"
 PORT="5432"
 VOLUME_NAME="redes2024_volume"
@@ -36,6 +37,7 @@ echo "Starting container: $CONTAINER_NAME"
 docker run --rm \
     --network "${NETWORK_NAME}" \
     --name "${CONTAINER_NAME}" \
+    -e POSTGRES_USER="${POSTGRES_USER}" \
     -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
     -p "${PORT}:${PORT}" \
     -v "${VOLUME_NAME}:/var/lib/postgresql/data" \

@@ -12,20 +12,12 @@ RUN apt-get update && apt-get install -y \
     git \
     vim \
     net-tools \
-    postgresql \
     postgresql-contrib
 
-# Switch to 'postgres' user for subsequent commands
-USER postgres
 
 # Create and initialize the PostgreSQL cluster
 RUN pg_createcluster 14 main
 
-# Switch back to root for service management and additional tasks
-USER root
-
-# Run necessary service commands or other tasks
-RUN service postgresql start
 
 # Use the environment image as the base
 FROM environment AS dependencies
@@ -37,9 +29,14 @@ RUN pip install -r __dependencies__/requirements.txt
 # Use the dependencies image as the base
 FROM dependencies AS code
 COPY container /app/
+WORKDIR /app
+RUN chmod +x __innit__/*.sh
+RUN chmod +x *.sh
+
 
 # Use the code image as the base
 FROM code AS runtime
 WORKDIR /app
 
-CMD ["./__innit__/start.sh"]
+RUN service postgresql start
+CMD ["postgres"]
