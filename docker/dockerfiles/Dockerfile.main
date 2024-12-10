@@ -1,0 +1,45 @@
+# Use the official ubuntu/postgres image as the base image
+FROM ubuntu/postgres:latest AS environment
+
+# Update package list and install Python, pip, and other tools you need
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    nano \
+    curl \
+    git \
+    vim \
+    net-tools \
+    postgresql \
+    postgresql-contrib
+
+# Switch to 'postgres' user for subsequent commands
+USER postgres
+
+# Create and initialize the PostgreSQL cluster
+RUN pg_createcluster 14 main
+
+# Switch back to root for service management and additional tasks
+USER root
+
+# Run necessary service commands or other tasks
+RUN service postgresql start
+
+# Use the environment image as the base
+FROM environment AS dependencies
+COPY container/__dependencies__ /app/__dependencies__
+WORKDIR /app
+
+RUN pip install -r __dependencies__/requirements.txt
+
+# Use the dependencies image as the base
+FROM dependencies AS code
+COPY container /app/
+
+# Use the code image as the base
+FROM code AS runtime
+WORKDIR /app
+
+CMD ["./__innit__/start.sh"]

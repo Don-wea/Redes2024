@@ -1,20 +1,22 @@
 #!/bin/bash
 
-echo --- images ---
+echo - --- Images --- -
 docker images
 echo
 
-echo --- containers ---
+echo - --- Containers --- -
 docker container ls
 echo
 
-# echo --- running containers ---
+# echo - --- running containers --- -
 # docker ps 
 # echo
 
-echo --- networks ---
+echo - --- Volumes --- -
+docker volume ls
+echo
+
+echo - --- Networks --- -
 docker network ls
 echo
 
-echo --- volumes ---
-docker volume ls

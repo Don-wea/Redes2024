@@ -4,7 +4,9 @@
 NETWORK_NAME="redes2024_network"
 SERVER_CONTAINER="redes2024_container_server"
 CLIENT_CONTAINER="redes2024_container_client"
-IMAGE_NAME="my-wifi-client:runtime-latest"  
+IMAGE_NAME="my-wifi-client:latest"  
+PORT="5432"
+SOCKETPORT="44555"
 
 
 
@@ -21,4 +23,4 @@ docker run --rm \
     --network "$NETWORK_NAME" \
     --name "$CLIENT_CONTAINER" \
     "$IMAGE_NAME" \
-    python3 client/src/client.py --host $SERVER_CONTAINER --port 5432
+    python3 src/client.py --host "$SERVER_CONTAINER" --port "$SOCKETPORT"

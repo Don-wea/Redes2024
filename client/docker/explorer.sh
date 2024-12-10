@@ -3,7 +3,7 @@
 # Variables
 NETWORK_NAME="redes2024_network"
 CLIENT_CONTAINER="redes2024_container_client"
-IMAGE_NAME="my-wifi-client:runtime-latest"  
+IMAGE_NAME="my-wifi-client:latest"  
 
 # Step 1: Check if the network exists, and create it if it doesn’t
 if ! docker network ls --filter name=^${NETWORK_NAME}$ --format "{{.Name}}" | grep -w "$NETWORK_NAME" > /dev/null; then

@@ -1,12 +1,10 @@
 print("esta funcionando el cliente con exito")
-
-
 import socket
 import argparse
 from core  import clientLogic as cl
 
 
-DEFAULT_HOST = 'localhost'        # Symbolic name meaning all available interfaces
+DEFAULT_HOST = 'redes2024_container_server'        # Symbolic name meaning all available interfaces
 DEFAULT_PORT = 44555              # Arbitrary non-privileged port\
 
 
