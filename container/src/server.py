@@ -22,7 +22,6 @@ DEFAULT_PORT = 44555                                # Arbitrary non-privileged p
 # Inicia el servidor
 def start_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
 
-    
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     mySocket.bind((host, port))
     mySocket.listen(5)
@@ -49,7 +48,6 @@ def start_server(host=DEFAULT_HOST, port=DEFAULT_PORT):
             client_thread = threading.Thread(target=ch.clientHandler, args=(connection, address,serverClient_queue))
             client_thread.start()
             logging.info("Creacion de Hilo cliente exitosa.")
-
 
     finally:
         mySocket.close()

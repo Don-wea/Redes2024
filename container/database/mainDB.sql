@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 -- Tabla de la Blacklist de usuarios
 CREATE TABLE IF NOT EXISTS blacklist (
     id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100) UNIQUE NOT NULL
+    nombre VARCHAR(100)
 );
 
 -- Función para validar acceso de usuario

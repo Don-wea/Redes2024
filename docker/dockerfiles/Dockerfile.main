@@ -12,7 +12,14 @@ RUN apt-get update && apt-get install -y \
     git \
     vim \
     net-tools \
-    postgresql-contrib
+    tshark \
+    postgresql-contrib \
+    rfkill \
+    systemctl \
+    iw \
+    hostapd \
+    dnsmasq \
+    iproute2
 
 
 # Create and initialize the PostgreSQL cluster

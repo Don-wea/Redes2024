@@ -12,7 +12,6 @@ from servidor.dao import guardarMensajes as gm
 
 # --- ~~ ~~ PUBLIC EVENTS ~~ ~~ --- 
 
-
 def mainLogic(host, port,serverClient_queue):
 
     lapseCount = 0
